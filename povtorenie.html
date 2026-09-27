@@ -1,0 +1,209 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Приёмы на одном листе</title>
+<meta name="description" content="Повторение перед олимпиадой: двенадцать приёмов по четырём темам, их приметы, принципы и главные ловушки на одной странице.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Golos+Text:wght@400;500;600&family=Unbounded:wght@700&display=swap">
+<style>
+:root{
+  --paper:#f7f9fd; --grid:#e2e9f5; --card:#ffffff; --panel:#f1f4fb; --line:#d4dcec;
+  --text:#1a2130; --muted:#5b6579; --ink:#2446c8; --ink-soft:#e6ecfc; --ink-line:#b9c8f3;
+  --red:#c2362c;
+  --f-display:"Unbounded","Golos Text",system-ui,sans-serif;
+  --f-body:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-hand:"Caveat","Segoe Print",cursive;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#10151f; --grid:#19212f; --card:#161e2c; --panel:#1a2334; --line:#2a3550;
+    --text:#e7ebf3; --muted:#9aa5ba; --ink:#93acff; --ink-soft:#1e2a4b; --ink-line:#34467c;
+    --red:#ff8f83;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#10151f; --grid:#19212f; --card:#161e2c; --panel:#1a2334; --line:#2a3550;
+  --text:#e7ebf3; --muted:#9aa5ba; --ink:#93acff; --ink-soft:#1e2a4b; --ink-line:#34467c;
+  --red:#ff8f83;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;
+  color:var(--text); font:400 15px/1.5 var(--f-body);
+  padding-inline:16px; padding-block:32px 56px;
+}
+::selection{background:var(--ink-soft); color:var(--text)}
+a{color:var(--ink)}
+:focus-visible{outline:2px solid var(--ink); outline-offset:3px}
+.wrap{max-width:1360px; margin:0 auto; display:grid; gap:28px}
+h1{font-family:var(--f-display); font-weight:700; font-size:clamp(26px,3.4vw,38px); line-height:1.15; margin:0; text-wrap:balance}
+h2,h3,p{margin:0}
+.top{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:28px; align-items:end}
+.lead{color:var(--muted); font-size:16px; max-width:58ch; margin-top:10px}
+.flow{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; counter-reset:f}
+.flow li{counter-increment:f; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 14px; display:grid; gap:2px; font-size:14px; color:var(--muted)}
+.flow li b{color:var(--text); font-size:15px; font-weight:600}
+.flow li b::before{content:counter(f) ". "; font-family:var(--f-display); color:var(--ink); font-size:13px}
+.themes{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; align-items:start}
+.theme{display:grid; gap:10px}
+.theme h2{font-family:var(--f-display); font-size:17px; font-weight:700; color:var(--ink); padding-bottom:6px; border-bottom:2px solid var(--ink-line)}
+.item{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; display:grid; gap:6px}
+.item h3{font-size:16px; font-weight:600; display:flex; gap:8px; align-items:baseline}
+.item h3 .n{font-family:var(--f-display); font-size:13px; color:var(--ink); font-variant-numeric:tabular-nums; min-width:1.4em}
+.item p{font-size:14px}
+.item p b{font-weight:600; color:var(--muted)}
+.item .how b{color:var(--ink)}
+.item .trap b{color:var(--red)}
+.item .adult{color:var(--muted)}
+.item .adult b{color:var(--text)}
+.item .go{justify-self:start; font-size:13px; font-weight:600; text-decoration:none; padding:2px 0}
+.item .go:hover{text-decoration:underline; text-underline-offset:3px}
+.bottom{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:16px}
+.final{background:var(--ink-soft); border:1px solid var(--ink-line); border-radius:14px; padding:16px 20px; display:grid; gap:8px}
+.final .hand{font-family:var(--f-hand); font-size:30px; line-height:1; color:var(--ink)}
+.final ol{margin:0; padding-left:22px; display:grid; gap:4px; font-size:15px}
+.check{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px 20px; display:grid; gap:8px; align-content:start}
+.check .hand{font-family:var(--f-hand); font-size:30px; line-height:1; color:var(--ink)}
+.check a{font-weight:600}
+@media (max-width:1100px){
+  .top{grid-template-columns:1fr}
+  .themes{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:640px){
+  .flow, .themes, .bottom{grid-template-columns:1fr}
+}
+@media print{
+  body{background:#fff; padding-block:0; font-size:12px}
+  .wrap{gap:14px}
+  .top{grid-template-columns:1fr}
+  .flow, .item .go, .check{display:none}
+  .themes{grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px}
+  .item{padding:8px 10px; break-inside:avoid}
+  .item p{font-size:11.5px}
+  .bottom{grid-template-columns:1fr}
+}
+</style>
+
+<main class="wrap">
+  <header class="top">
+    <div>
+      <h1>Приёмы на одном листе</h1>
+      <p class="lead">Прочитай условие, найди примету и вспомни, как решать и где легко ошибиться. Строка «Взрослые» подскажет, как ту же задачу решают в старших классах. Номера и темы те же, что в большой шпаргалке.</p>
+    </div>
+    <ol class="flow" aria-label="Как заниматься">
+      <li><b>Тренировка</b>в каждом приёме сначала три простые задачи</li>
+      <li><b>Задача с олимпиады</b>потом настоящая задача, подсказки по одной</li>
+      <li><b>Угадай приём</b>в конце задачи вперемешку: назови приём сам</li>
+    </ol>
+  </header>
+
+  <div class="themes">
+    <section class="theme" aria-labelledby="t1">
+      <h2 id="t1">Текстовые задачи</h2>
+      <article class="item"><h3><span class="n">1</span>Метод частей</h3>
+        <p><b>Примета:</b> «в 2 раза больше», «в 3 раза быстрее» и известна сумма.</p>
+        <p class="how"><b>Как решать:</b> самое маленькое за 1 кусочек, всё через кусочки, сумму делим на число кусочков.</p>
+        <p class="trap"><b>Ловушка:</b> «быстрее» значит времени меньше (делим), «дольше» значит больше (умножаем).</p>
+        <p class="adult"><b>Взрослые:</b> уравнение <i>x</i> + 3<i>x</i> = 48, деление в отношении 1 : 3.</p>
+        <a class="go" href="index.html#chasti">Открыть в шпаргалке</a></article>
+      <article class="item"><h3><span class="n">2</span>Решение с конца</h3>
+        <p><b>Примета:</b> известен результат цепочки действий, спрашивают начало.</p>
+        <p class="how"><b>Как решать:</b> идём от конца, каждое действие заменяем обратным: «+» на «−», «:» на «×».</p>
+        <p class="trap"><b>Ловушка:</b> «втрое меньше» это деление, а отменять начинаем с последнего действия.</p>
+        <p class="adult"><b>Взрослые:</b> уравнение (<i>x</i> + 7) × 2 = 30, его тоже решают с конца.</p>
+        <a class="go" href="index.html#skonca">Открыть в шпаргалке</a></article>
+      <article class="item"><h3><span class="n">3</span>Столбы и промежутки</h3>
+        <p><b>Примета:</b> предметы через равные расстояния; «с 23-го по 30-й».</p>
+        <p class="how"><b>Как решать:</b> на отрезке предметов на 1 больше промежутков, по кругу столько же.</p>
+        <p class="trap"><b>Ловушка:</b> забыть +1 на отрезке или посчитать угловой предмет дважды.</p>
+        <p class="adult"><b>Взрослые:</b> формула «длина : шаг + 1» из арифметической прогрессии.</p>
+        <a class="go" href="index.html#stolby">Открыть в шпаргалке</a></article>
+      <article class="item"><h3><span class="n">4</span>Метод предположения</h3>
+        <p><b>Примета:</b> два вида предметов со своей «ценой», известны общее число и итог.</p>
+        <p class="how"><b>Как решать:</b> пусть все одного вида; разницу с итогом делим на то, что даёт одна замена.</p>
+        <p class="trap"><b>Ловушка:</b> одна замена меняет итог сразу на обе «цены»: не 3, а 5 + 3 = 8.</p>
+        <p class="adult"><b>Взрослые:</b> уравнение 2(10 − <i>x</i>) + 4<i>x</i> = 28 или система уравнений.</p>
+        <a class="go" href="index.html#predpolozhenie">Открыть в шпаргалке</a></article>
+      <article class="item"><h3><span class="n">5</span>Считаем двумя способами</h3>
+        <p><b>Примета:</b> один предмет попадает в подсчёт несколько раз.</p>
+        <p class="how"><b>Как решать:</b> считаем одно и то же двумя способами и приравниваем; сумма больше числа предметов.</p>
+        <p class="trap"><b>Ловушка:</b> принять сумму по признакам за число предметов (120 цветов это не 120 яблок).</p>
+        <p class="adult"><b>Взрослые:</b> всего = A + B − оба; число пар <i>n</i>(<i>n</i> − 1) : 2.</p>
+        <a class="go" href="index.html#dvazhdy">Открыть в шпаргалке</a></article>
+    </section>
+
+    <section class="theme" aria-labelledby="t2">
+      <h2 id="t2">Логика</h2>
+      <article class="item"><h3><span class="n">6</span>Стрелки порядка</h3>
+        <p><b>Примета:</b> «пришла перед», «сразу за», «уступила», «не первая».</p>
+        <p class="how"><b>Как решать:</b> каждая фраза это стрелка «кто раньше»; «сразу за» склеиваем; собираем цепочки.</p>
+        <p class="trap"><b>Ловушка:</b> «Кира уступила Лене» значит, что впереди Лена.</p>
+        <p class="adult"><b>Взрослые:</b> граф и упорядочивание, как в планировщиках задач.</p>
+        <a class="go" href="index.html#poryadok">Открыть в шпаргалке</a></article>
+      <article class="item"><h3><span class="n">7</span>Правда и ложь</h3>
+        <p><b>Примета:</b> каждый сказал сколько-то правды и сколько-то лжи.</p>
+        <p class="how"><b>Как решать:</b> предполагаем, что фраза правдива, выводим следствия; противоречие значит «наоборот».</p>
+        <p class="trap"><b>Ловушка:</b> проверить одну ветку и остановиться. Вторая должна привести к противоречию.</p>
+        <p class="adult"><b>Взрослые:</b> таблица истинности и доказательство от противного.</p>
+        <a class="go" href="index.html#pravda">Открыть в шпаргалке</a></article>
+    </section>
+
+    <section class="theme" aria-labelledby="t3">
+      <h2 id="t3">Перебор и алгоритмы</h2>
+      <article class="item"><h3><span class="n">8</span>Шаг за шагом по правилу</h3>
+        <p><b>Примета:</b> правило повторяется каждую минуту или ход.</p>
+        <p class="how"><b>Как решать:</b> выполняем по одному шагу, записываем, после каждого шага проверяем всё заново.</p>
+        <p class="trap"><b>Ловушка:</b> взять старые данные: после шага у чисел появились новые соседи.</p>
+        <p class="adult"><b>Взрослые:</b> алгоритм с циклом и формула последовательности.</p>
+        <a class="go" href="index.html#pravilo">Открыть в шпаргалке</a></article>
+      <article class="item"><h3><span class="n">9</span>Перебор по случаям</h3>
+        <p><b>Примета:</b> «сколько существует…», «сколькими способами…».</p>
+        <p class="how"><b>Как решать:</b> убираем известное, делим на случаи без повторов, перебираем по порядку, складываем.</p>
+        <p class="trap"><b>Ловушка:</b> забыть уже известное (две единицы в «2011») или посчитать вариант в двух случаях.</p>
+        <p class="adult"><b>Взрослые:</b> правило произведения: 3 × 2 × 1 = 6.</p>
+        <a class="go" href="index.html#perebor">Открыть в шпаргалке</a></article>
+    </section>
+
+    <section class="theme" aria-labelledby="t4">
+      <h2 id="t4">Геометрия и карты</h2>
+      <article class="item"><h3><span class="n">10</span>Разбор случаев</h3>
+        <p><b>Примета:</b> точки на прямой, неизвестна сторона; в вопросе «может».</p>
+        <p class="how"><b>Как решать:</b> рисуем каждый случай отдельно (слева и справа) и считаем для каждого.</p>
+        <p class="trap"><b>Ловушка:</b> потерять вариант или придумать лишний: у прямой только две стороны.</p>
+        <p class="adult"><b>Взрослые:</b> модуль: у |<i>x</i> − 7| = 3 два корня, 4 и 10.</p>
+        <a class="go" href="index.html#sluchai">Открыть в шпаргалке</a></article>
+      <article class="item"><h3><span class="n">11</span>Ходы по клеткам</h3>
+        <p><b>Примета:</b> клетчатое поле, фигура или ход, «куда можно попасть».</p>
+        <p class="how"><b>Как решать:</b> смотрим на концы фигуры, пробуем ход во все стороны, вычёркиваем упирающиеся в стену.</p>
+        <p class="trap"><b>Ловушка:</b> «только» значит без лишних клеток, но показаны могут быть не все.</p>
+        <p class="adult"><b>Взрослые:</b> координаты и векторы: ход (±1; ±3).</p>
+        <a class="go" href="index.html#hody">Открыть в шпаргалке</a></article>
+      <article class="item"><h3><span class="n">12</span>Карта дорог</h3>
+        <p><b>Примета:</b> дома, дороги с длинами, «самый короткий путь».</p>
+        <p class="how"><b>Как решать:</b> рисуем схему, выписываем все пути без повторов, выбираем наименьшую сумму.</p>
+        <p class="trap"><b>Ловушка:</b> выбрать путь на глаз: меньше дорог не значит короче.</p>
+        <p class="adult"><b>Взрослые:</b> алгоритм Дейкстры, как в навигаторе.</p>
+        <a class="go" href="index.html#karta">Открыть в шпаргалке</a></article>
+    </section>
+  </div>
+
+  <div class="bottom">
+    <section class="final" aria-label="Проверка перед ответом">
+      <span class="hand">Перед ответом</span>
+      <ol>
+        <li>Что именно я посчитал? То ли, о чём спрашивают?</li>
+        <li>Не посчитал ли я что-то дважды?</li>
+        <li>Все ли варианты я нашёл, и нет ли невозможных?</li>
+        <li>Подставил ли я ответ обратно в условие?</li>
+      </ol>
+    </section>
+    <section class="check" aria-label="Проверь себя">
+      <span class="hand">Проверь себя</span>
+      <p>Закрой строки «Как решать» и «Ловушка» и по одной примете назови приём. Потом пройди раздел <a href="index.html#ugaday">«Угадай приём»</a> в шпаргалке: 12 задач вперемешку.</p>
+    </section>
+  </div>
+</main>
